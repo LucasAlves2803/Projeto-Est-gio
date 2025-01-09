@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <title>Cadastro e Listagem de Produtos</title>
+</head>
+<body>
+    <div id="box">
+        
+        <div class="titulo">
+            <h2>Cadastrar Produto</h2>
+        </div>
+        
+        <form id="form" class="form">
+            
+            <div class="form-control">
+                <label for="username">Nome do Produto</label>
+                <input type="text" id="username" placeholder="Digite o nome do produto">
+                <i>a</i>
+                <i>a</i>
+                <small>Nome não inserido</small>
+            </div>
+       
+            <div class="form-control">
+                <label for="descricão">Descrição do Produto</label>
+                <textarea rows="10" cols="30" maxlength="100" id="descricao" placeholder="Faça uma breve descrição do produto"> </textarea>
+                <small>Olá !</small>
+            </div>
+     
+            <div class="form-control">
+                <label for="username">Valor do Produto</label>
+                <input type="number" id="valor" placeholder="Digite um número">
+            <i>a</i>
+            <i><label for=""></label></i>
+            <small> número não inserido</small>
+            </div>
+    
+            <div class="form-control">
+                <label for="">Produto está disponível?</label>
+                <div id="opcoes">
+                    <label class="escolha">
+                        Sim <input type="checkbox" id="sim" name="opcao" value="sim" onclick="toggleCheckbox('sim', 'nao')">
+                        
+                    </label>
+                    <label class="escolha">
+                        Não
+                        <input type="checkbox" id="nao" name="opcao" value="nao" onclick="toggleCheckbox('nao', 'sim')">
+                    </label>
+                </div>  
+                <small>fgdgds </small>
+            </div>
+
+
+            <div class="form-control">
+                <button type="submit"> Enviar</button>
+            </div>
+            
+        </form>
+    </div>
+</body>
+<!-- <script>
+    function toggleCheckbox(selectedId, otherId) {
+        const selected = document.getElementById(selectedId);
+        const other = document.getElementById(otherId);
+        if (selected.checked) {
+            other.checked = false;
+        }
+    }
+</script> -->
+<script src="script.js"></script>
+</html>
