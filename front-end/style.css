@@ -33,9 +33,10 @@
   body {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Alinha no topo */
+    align-items: center; /* Alinha no topo */
     background: linear-gradient(90deg, red 0%, white 80%);
     min-height: 100vh; /* Deixa o body crescer com o conteúdo */
+
     width: 100vw;
     /* overflow-y: auto; Permite o scroll vertical */
 }
@@ -220,6 +221,7 @@
     text-align: center;
     position: sticky;
     top: 0; /* Fixa o título no topo */
+    border-radius: 8px;
     background-color: rgba(249, 104, 104, 0.9); /* Fundo para o título */
     z-index: 1; /* Garante que o título fique acima de outros elementos */
 }

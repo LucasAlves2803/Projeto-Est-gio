@@ -69,9 +69,7 @@ async function checkInputs() {
         // Processar a resposta
         const data = await response.json();
         if (response.ok) {
-            document.getElementById("response").innerHTML = `
-                <p>Produto cadastrado com sucesso:</p>
-            `;
+            console.log('dados cadastrados com sucesso');
             carregarListagem();
         } else {
             console.log("Erro ao cadastrar o produto:", data);
