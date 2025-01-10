@@ -11,10 +11,11 @@ form.addEventListener('submit', (e) =>{
     checkInputs();
 })
 
-function checkInputs() {
+async function checkInputs() {
     const usernamevalue = username.value.trim();
     const descricaovalue = descricao.value.trim();
     const valorvalue = valor.value.trim();
+    const disponivel = true;
     
 
     // Verificação do campo username
@@ -44,6 +45,74 @@ function checkInputs() {
        // console.log(opcoes);
     } else {
         Acerto(opcoes); // A mensagem de sucesso será aplicada a uma das opções
+    }
+
+    const produto = {
+        usernamevalue,
+        descricaovalue,
+        valorvalue,
+        disponivel
+    };
+
+
+    try {
+        // Enviar os dados para o servidor
+        const response = await fetch("http://localhost:3000/api/produto", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(produto)
+        });
+        console.log("dfs " + response);
+
+        // Processar a resposta
+        const data = await response.json();
+        if (response.ok) {
+            document.getElementById("response").innerHTML = `
+                <p>Produto cadastrado com sucesso:</p>
+            `;
+            carregarListagem();
+        } else {
+            document.getElementById("response").innerHTML = `
+                <p>Erro ao cadastrar o produto:</p>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        }
+    } catch (error) {
+        console.error("Erro ao fazer a requisição:", error);
+        document.getElementById("response").innerHTML = `
+            <p>Erro na requisição: ${error.message}</p>
+        `;
+    }
+
+
+}
+
+async function carregarListagem(){
+    // requisição GET É MÉTODO DEFAULT (PADRÃO) NÃO PRECISA SER DECLARADO
+    try {
+        const response = await fetch("http://localhost:3000/api/");
+        const data = await response.json(); // Isso processa o corpo da resposta como JSON
+        console.log("Dados recebidos:", data); // Aqui você verá os produtos no console
+        const listagem = document.getElementById("listagem");
+        listagem.innerHTML = "";
+        data.forEach(dado => {
+            console.log("Elemento da lista:", dado.nome);    
+            listagem.innerHTML += `
+                <div class="dados">
+                    <h2>${dado.nome}</h2>
+                    <h2>${dado.valor}</h2>
+                    
+                </div>
+            `;	
+        });
+        
+    } catch (error) {
+        console.error("Erro ao fazer a requisição GET:", error);
+        document.getElementById("response").innerHTML = `
+            <p>Erro na requisição get: ${error.message}</p>
+        `;
     }
 }
 
