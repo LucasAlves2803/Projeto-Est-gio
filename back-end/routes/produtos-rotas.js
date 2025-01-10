@@ -12,7 +12,7 @@ const bodyParser = require("body-parser");
 router.use(bodyParser.json());
 router.get("/",(req,res) =>{
     console.log("GET chamado");
-    Produto.find({}).then((dados)=>{
+    Produto.find({}).sort({valor: 1}).then((dados)=>{ // comando find busca todos os produtos no banco de dados, o sort ordena a coluna valor em ordem crescente, o 1 é para indicar que a ordem é crescente 
         return res.json(dados);
     })
 });

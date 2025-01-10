@@ -74,16 +74,17 @@ async function checkInputs() {
             `;
             carregarListagem();
         } else {
-            document.getElementById("response").innerHTML = `
-                <p>Erro ao cadastrar o produto:</p>
-                <pre>${JSON.stringify(data, null, 2)}</pre>
-            `;
+            console.log("Erro ao cadastrar o produto:", data);
+            // document.getElementById("response").innerHTML = `
+            //     <p>Erro ao cadastrar o produto:</p>
+            //     <pre>${JSON.stringify(data, null, 2)}</pre>
+            // `;
         }
     } catch (error) {
         console.error("Erro ao fazer a requisição:", error);
-        document.getElementById("response").innerHTML = `
-            <p>Erro na requisição: ${error.message}</p>
-        `;
+        // document.getElementById("response").innerHTML = `
+        //     <p>Erro na requisição: ${error.message}</p>
+        // `;
     }
 
 
@@ -95,19 +96,30 @@ async function carregarListagem(){
         const response = await fetch("http://localhost:3000/api/");
         const data = await response.json(); // Isso processa o corpo da resposta como JSON
         console.log("Dados recebidos:", data); // Aqui você verá os produtos no console
-        const listagem = document.getElementById("listagem");
-        listagem.innerHTML = "";
+        const box2 = document.createElement('div'); // cria a div box2
+        box2.className = "box2"; // adiciona a classe box2 a div box2
+        const listagem = document.createElement('div'); 
+        const titulo = document.createElement('h2');
+        listagem.className = "listagem";
+        titulo.innerHTML = "Listagem de produtos";
+        document.body.innerHTML = ""; // apaga todo o conteúdo do body     
+        document.body.appendChild(box2); // adiciona a div box2 ao body
+        box2.appendChild(titulo); // adiciona o titulo a div box2
+        box2.appendChild(listagem); // adiciona a div listagem a div box2
+        listagem.innerHTML = `<div class="subtitulo">
+        <h2>Nome do Produto</h2>
+        <h2>Valor</h2> </div>`;                   
+    ;
         data.forEach(dado => {
             console.log("Elemento da lista:", dado.nome);    
             listagem.innerHTML += `
                 <div class="dados">
-                    <h2>${dado.nome}</h2>
-                    <h2>${dado.valor}</h2>
-                    
+                    <h3>${dado.nome}</h3>
+                    <h3>${dado.valor}</h3>                   
                 </div>
             `;	
         });
-        
+      listagem.innerHTML += `<button class="btn" onclick="window.location.reload()">Cadastrar Novo Produto</button>`;  
     } catch (error) {
         console.error("Erro ao fazer a requisição GET:", error);
         document.getElementById("response").innerHTML = `
